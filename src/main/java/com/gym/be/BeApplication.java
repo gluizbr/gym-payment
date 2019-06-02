@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-@SpringBootApplication(scanBasePackages = "com.gym.be")
+@SpringBootApplication(scanBasePackages = "com.gym")
 @EnableWebMvc
 public class BeApplication extends JFrame {
   public BeApplication() {

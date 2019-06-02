@@ -1,6 +1,5 @@
-package com.gym.be.mongoDBTest;
+package com.gym.be.register;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,23 +8,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/payment")
-public class PaymentController {
+public class RegisterController {
 
-  private PaymentService paymentService;
+  private RegisterService registerService;
 
-  public PaymentController(PaymentService paymentService) {
-    this.paymentService = paymentService;
+  public RegisterController(RegisterService registerService) {
+    this.registerService = registerService;
   }
 
   @GetMapping
   public ResponseEntity paymentGet() {
-    return ResponseEntity.ok(paymentService.findAll());
+    return ResponseEntity.ok(registerService.findAll());
   }
 
   @PostMapping
   public ResponseEntity paymentPost() {
-    return ResponseEntity.ok(paymentService.save(
-        PaymentModel.builder().name("Leo").build()
+    return ResponseEntity.ok(registerService.save(
+        RegisterModel.builder().name("Leo").build()
     ));
   }
 }
