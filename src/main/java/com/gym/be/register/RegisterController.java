@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/register")
 public class RegisterController {
 
   private RegisterService registerService;
