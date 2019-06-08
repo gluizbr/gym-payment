@@ -6,5 +6,5 @@ import java.util.Date;
 
 public interface PaymentRepository extends MongoRepository<PaymentModel, String> {
 
-  PaymentModel findByDate(Date date);
+//    PaymentModel findByDate(Date paymentDate);
 }
