@@ -28,6 +28,7 @@ public class BeApplication extends JFrame {
       System.exit(0);
     });
 
+    //Put UI class here
     createLayout(quitButton);
 
     setTitle("Quit button");
