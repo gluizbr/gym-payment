@@ -1,11 +1,7 @@
-package com.gym.be;
+package com.gym.fe;
 
 import lombok.var;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 
 import javax.swing.GroupLayout;
@@ -13,14 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-@SpringBootApplication(scanBasePackages = "com.gym")
-@EnableWebMvc
-public class BeApplication extends JFrame {
-  public BeApplication() {
-    initUI();
-  }
-
-  private void initUI() {
+public class UIInit extends JFrame {
+  public void initUI() {
 
     var quitButton = new JButton("Quit");
 
@@ -52,18 +42,6 @@ public class BeApplication extends JFrame {
     gl.setVerticalGroup(gl.createSequentialGroup()
         .addComponent(arg[0])
     );
-  }
-
-  public static void main(String[] args) {
-
-    var ctx = new SpringApplicationBuilder(BeApplication.class)
-        .headless(false).run(args);
-
-    EventQueue.invokeLater(() -> {
-
-      var ex = ctx.getBean(BeApplication.class);
-      ex.setVisible(true);
-    });
   }
 
 }

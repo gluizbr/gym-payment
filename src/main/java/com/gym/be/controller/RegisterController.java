@@ -18,19 +18,17 @@ public class RegisterController {
     }
 
     @GetMapping
-    public ResponseEntity paymentGet() {
+    public ResponseEntity registerGet() {
         return ResponseEntity.ok(registerService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity paymentPost(@RequestParam String id,
-                                      @RequestParam String name,
+    public ResponseEntity registerPost(@RequestParam String name,
                                       @RequestParam List<String> modalities,
                                       @RequestParam Integer paymentDate,
                                       @RequestParam Float value) {
         return ResponseEntity.ok(registerService.save(
                 RegisterModel.builder()
-                        .id(id)
                         .name(name)
                         .modalities(modalities)
                         .paymentDate(paymentDate)
