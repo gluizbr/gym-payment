@@ -20,4 +20,5 @@ public class PaymentModel {
   private String id;
   private RegisterModel register;
   private Date paymentDate;
+  private Boolean payed;
 }
