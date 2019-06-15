@@ -1,5 +1,6 @@
 package com.gym.be.payment;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gym.be.register.RegisterModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,9 +17,11 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class PaymentModel {
+
   @Id
   private String id;
   private RegisterModel register;
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private Date paymentDate;
   private Boolean payed;
 }

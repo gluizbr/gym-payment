@@ -1,5 +1,6 @@
 package com.gym.be.register;
 
+import com.gym.be.payment.PaymentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,16 +9,29 @@ import java.util.List;
 public class RegisterService {
 
   private RegisterRepository registerRepository;
+  private PaymentService paymentService;
 
-  public RegisterService(RegisterRepository registerRepository){
+  public RegisterService(RegisterRepository registerRepository,
+      PaymentService paymentService) {
     this.registerRepository = registerRepository;
+    this.paymentService = paymentService;
   }
 
   public RegisterModel save(RegisterModel register) {
-    return registerRepository.save(register);
+    RegisterModel saved = registerRepository.save(register);
+    paymentService.generatePayment(saved);
+    return saved;
   }
 
   public List<RegisterModel> findAll() {
     return registerRepository.findAll();
+  }
+
+  public RegisterModel findByName(String name) {
+    return registerRepository.findByName(name);
+  }
+
+  public List<RegisterModel> findByModalities(List<String> modalities) {
+    return registerRepository.findByModalitiesContains(modalities);
   }
 }
