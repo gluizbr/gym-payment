@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
@@ -91,30 +92,55 @@ public class UIInit extends JFrame {
         //Criação do button Pesquisar
         var pesquisarButton = new JButton("Pesquisar");
 
-        //Ação do botão pesquisar
+        ////////////////// Ação do botão pesquisar //////////////////
+
+        //Cria o SearchFrame
+        SearchFrame searchFrame = new SearchFrame(this);
+
+        //Cria a tabela
+        SearchTable tabela = new SearchTable();
+
         pesquisarButton.addActionListener((ActionEvent event) -> {
+
+            //Desabilita a tabelaLimpa e o painelTabelaLimpa
+            tabelaLimpa.setVisible(false);
+            painelTabelaLimpa.setVisible(false);
 
             ////////////////// Atualiza JTabel Tabela //////////////////
 
-            //Passa a data inicial já separada em ano, mês e dia para vecDtInicial
-            String[] vecDtInicial = dtInicialTextField.getText().split("/");
+            //Verifica preenchimento do dtInicialTextField
+            Date dtInicial = null;
+            if (dtInicialTextField.getText().isEmpty() == false) {
 
-            //Passa vecDtInicial para listDtInicial
-            List<String> listDtInicial = new ArrayList<>();
-            listDtInicial.addAll(Arrays.asList(vecDtInicial));
+                //Passa a data inicial já separada em dia, mês e ano para vecDtInicial
+                String[] vecDtInicial = dtInicialTextField.getText().split("/");
 
-            //Passa para dtInicial o listDtInicial
-            Date dtInicial = new Date(Integer.parseInt(listDtInicial.get(2)), Integer.parseInt(listDtInicial.get(1)), Integer.parseInt(listDtInicial.get(0)));
+                try {
+                    //Formata dtInicial para o SimpleDateFormat
+                    dtInicial = new SimpleDateFormat("yyyyMMdd").parse(vecDtInicial[2] + vecDtInicial[1] + vecDtInicial[0]);
+                } catch (ParseException e) {
+                    System.out.println("Erro no formato de data");
+                    dtInicial = null;
+                    e.printStackTrace();
+                }
+            }
 
-            //Passa a data final já separada em ano, mês e dia para vecDtFinal
-            String[] vecDtFinal = dtFinalTextField.getText().split("/");
+            //Verifica preenchimento do dtFinalTextField
+            Date dtFinal = null;
+            if (dtFinalTextField.getText().isEmpty() == false) {
 
-            //Passa vecDtFinal para listDtFinal
-            List<String> listDtFinal = new ArrayList<>();
-            listDtFinal.addAll(Arrays.asList(vecDtFinal));
+                //Passa a data final já separada em dia, mês e ano para vecDtFinal
+                String[] vecDtFinal = dtFinalTextField.getText().split("/");
 
-            //Passa para dtFinal o listDtFinal
-            Date dtFinal = new Date(Integer.parseInt(listDtFinal.get(2)), Integer.parseInt(listDtFinal.get(1)), Integer.parseInt(listDtFinal.get(0)));
+                try {
+                    //Formata dtFinal para o SimpleDateFormat
+                    dtFinal = new SimpleDateFormat("yyyyMMdd").parse(vecDtFinal[2] + vecDtFinal[1] + vecDtFinal[0]);
+                } catch (ParseException e) {
+                    System.out.println("Erro no formato de data");
+                    dtFinal = null;
+                    e.printStackTrace();
+                }
+            }
 
             //Passa as modalidade já formatadas para vecModalidadeText
             String[] vecModalidadeText = modalidadeText.getText().replaceAll(" ", "").split(",");
@@ -123,8 +149,7 @@ public class UIInit extends JFrame {
             List<String> listModalidade = new ArrayList<>();
             listModalidade.addAll(Arrays.asList(vecModalidadeText));
 
-            List<PaymentModel> listRetorno = (List<PaymentModel>) paymentController.paymentGet("Gabriel", null, null, null, null).getBody();
-            //paymentController.paymentGet(clienteText.getText(),dtInicial,dtFinal,pagoCheckBox.isSelected(),listModalidade).getBody();
+            List<PaymentModel> listRetorno = (List<PaymentModel>) paymentController.paymentGet((clienteText.getText().isEmpty() ? null : clienteText.getText()), dtInicial, dtFinal, pagoCheckBox.isSelected(), (listModalidade.isEmpty() ? null : listModalidade)).getBody();
 
             //Matriz usada na criação tabela
             String[][] dados = new String[listRetorno.size()][5];
@@ -145,20 +170,11 @@ public class UIInit extends JFrame {
                 dados[i][4] = pago;
             });
 
-            //Criação do JTabel Tabela
-            JTable tabela;
+            tabela.preencheTabela(dados, colunasTabela);
 
-            //Inicialização da tabela com os dados e coluna
-            tabela = new JTable(dados, colunasTabela);
+            searchFrame.preparaSearchFrame(tabela.tabela);
 
-            //Desabilita a tabelaLimpa e o painelTabelaLimpa
-            tabelaLimpa.setVisible(false);
-            painelTabelaLimpa.setVisible(false);
-
-            //Criação do JScollPane painelTabela
-            JScrollPane painelTabela = new JScrollPane(tabela);
-
-            createLayout(painelTabela, this, 300, 200, 5, 160);
+            createLayout(searchFrame.painelTabelaSearchFrame, this, 300, 200, 5, 160);
         });
 
         createLayout(pesquisarButton, this, 100, 30, 162, 117);
