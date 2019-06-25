@@ -68,11 +68,11 @@ public class UIInit extends JFrame {
 
         //Dados que serão exibidos na tabelaLimpa
         String[][] dadosLimpo = {
-                {"", "", "", "", ""}
+                {"", "", "", "", "", ""}
         };
 
         //Colunas da tabela
-        String[] colunasTabela = {"Cliente", "Modalidades", "Data Vencimento", "Valor", "Pago"};
+        String[] colunasTabela = {"ID", "Cliente", "Modalidades", "Data Vencimento", "Valor", "Pago"};
 
         //Criação do JTabel TabelaLimpa
         JTable tabelaLimpa;
@@ -101,6 +101,11 @@ public class UIInit extends JFrame {
         SearchTable tabela = new SearchTable();
 
         pesquisarButton.addActionListener((ActionEvent event) -> {
+
+            if (this.isAncestorOf(tabela.tabela)) {
+                this.remove(tabela.tabela);
+                this.remove(searchFrame.painelTabelaSearchFrame);
+            }
 
             //Desabilita a tabelaLimpa e o painelTabelaLimpa
             tabelaLimpa.setVisible(false);
@@ -152,22 +157,24 @@ public class UIInit extends JFrame {
             List<PaymentModel> listRetorno = (List<PaymentModel>) paymentController.paymentGet((clienteText.getText().isEmpty() ? null : clienteText.getText()), dtInicial, dtFinal, pagoCheckBox.isSelected(), (listModalidade.isEmpty() ? null : listModalidade)).getBody();
 
             //Matriz usada na criação tabela
-            String[][] dados = new String[listRetorno.size()][5];
+            String[][] dados = new String[listRetorno.size()][6];
 
             //Popula a matriz com os dados
             listRetorno.forEach(payment -> {
                 int i = listRetorno.indexOf(payment);
+                String id = payment.getRegister().getId();
+                dados[i][0] = id;
                 String nome = payment.getRegister().getName();
-                dados[i][0] = nome;
+                dados[i][1] = nome;
                 String modalidades = payment.getRegister().getModalities().toString().replace("]", "");
-                dados[i][1] = modalidades.replace("[", "");
+                dados[i][2] = modalidades.replace("[", "");
                 SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
                 String vencimento = fmt.format(payment.getPaymentDate());
-                dados[i][2] = vencimento;
+                dados[i][3] = vencimento;
                 String valor = payment.getRegister().getValue().toString();
-                dados[i][3] = valor;
+                dados[i][4] = valor;
                 String pago = payment.getPayed() ? "Pago" : "Pendente";
-                dados[i][4] = pago;
+                dados[i][5] = pago;
             });
 
             tabela.preencheTabela(dados, colunasTabela);
@@ -178,6 +185,27 @@ public class UIInit extends JFrame {
         });
 
         createLayout(pesquisarButton, this, 100, 30, 162, 117);
+
+        ////////////////// PAGAMENTO //////////////////
+
+        //Criação do label ID
+        final JLabel idLabel = new JLabel("ID:");
+        createLayout(idLabel, this, 150, 50, 40, 355);
+
+        //Criação do TextField ID
+        final JTextField idText = new JTextField();
+        createLayout(idText, this, 100, 20, 57, 370);
+
+        //Criação do button Cadastro
+        var pagarButton = new JButton("Pagar");
+
+        pagarButton.addActionListener((ActionEvent event) -> {
+            String idPagar = idText.getText();
+            paymentController.paymentPost(idPagar);
+
+        });
+
+        createLayout(pagarButton, this, 100, 30, 155, 366);
 
         ////////////////// CADASTRO //////////////////
 
@@ -194,6 +222,9 @@ public class UIInit extends JFrame {
 
         createLayout(cadastrarButton, this, 100, 30, 110, 400);
 
+        ////////////////// TELA INICIAL //////////////////
+
+        setResizable(false);
         setTitle("Gym Application");
         setSize(310, 450);
         setLocationRelativeTo(null);
