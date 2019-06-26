@@ -1,8 +1,8 @@
 package com.gym.fe;
 
 import com.gym.be.payment.PaymentController;
-import com.gym.be.controller.RegisterController;
 import com.gym.be.payment.PaymentModel;
+import com.gym.be.register.RegisterController;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +10,19 @@ import org.springframework.stereotype.Service;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import javax.swing.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 @Service
 public class UIInit extends JFrame {
@@ -239,31 +250,40 @@ public class UIInit extends JFrame {
     JTextField modalitiesField = new JTextField();
 
     JButton confirmButton = new JButton("Cadastrar");
-    confirmButton.setEnabled(false);
+    confirmButton.setEnabled(true);
 
     final JComponent[] inputs = new JComponent[] {
-            nameLabel,
-            nameField,
-            dateLabel,
-            paymentField,
-            valueLabel,
-            valueField,
-            modalitiesLabel,
-            modalitiesField,
-            confirmButton,
+        nameLabel,
+        nameField,
+        dateLabel,
+        paymentField,
+        valueLabel,
+        valueField,
+        modalitiesLabel,
+        modalitiesField,
+        confirmButton,
     };
 
     cadastrarButton.addActionListener((ActionEvent event) -> {
       JOptionPane.showOptionDialog(
-              null,
-              inputs,
-              "Cadastro",
-              JOptionPane.DEFAULT_OPTION,
-              JOptionPane.INFORMATION_MESSAGE,
-              null,
-              new Object[]{confirmButton},
-              confirmButton
+          null,
+          inputs,
+          "Cadastro",
+          JOptionPane.DEFAULT_OPTION,
+          JOptionPane.INFORMATION_MESSAGE,
+          null,
+          new Object[] {confirmButton},
+          confirmButton
       );
+    });
+
+    confirmButton.addActionListener((ActionEvent event) -> {
+      registerController.registerPost(
+          ((JTextField) inputs[1]).getText(),
+          ((JTextField) inputs[7]).getText().equals("") ? null : Arrays.asList(
+              ((JTextField) inputs[7]).getText().replaceAll(" ", "").split(",")),
+          Integer.valueOf(((JTextField) inputs[3]).getText()),
+          Float.valueOf(((JTextField) inputs[5]).getText()));
     });
 
 //    cadastrarButton.addActionListener((ActionEvent event) -> {

@@ -1,7 +1,5 @@
-package com.gym.be.controller;
+package com.gym.be.register;
 
-import com.gym.be.register.RegisterModel;
-import com.gym.be.register.RegisterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
