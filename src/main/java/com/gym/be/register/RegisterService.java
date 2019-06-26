@@ -26,12 +26,4 @@ public class RegisterService {
   public List<RegisterModel> findAll() {
     return registerRepository.findAll();
   }
-
-  public RegisterModel findByName(String name) {
-    return registerRepository.findByName(name);
-  }
-
-  public List<RegisterModel> findByModalities(List<String> modalities) {
-    return registerRepository.findByModalitiesContains(modalities);
-  }
 }

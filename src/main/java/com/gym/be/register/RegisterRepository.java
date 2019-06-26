@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RegisterRepository extends MongoRepository<RegisterModel, String> {
 
-  RegisterModel findByName(String alias);
+  List<RegisterModel> findByName(String alias);
 
   List<RegisterModel> findByModalitiesContains(List<String> modalities);
 }
