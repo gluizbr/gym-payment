@@ -1,8 +1,8 @@
 package com.gym.fe;
 
 import com.gym.be.payment.PaymentController;
-import com.gym.be.controller.RegisterController;
 import com.gym.be.payment.PaymentModel;
+import com.gym.be.register.RegisterController;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +10,19 @@ import org.springframework.stereotype.Service;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import javax.swing.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 @Service
 public class UIInit extends JFrame {
@@ -219,8 +230,60 @@ public class UIInit extends JFrame {
     //Criação do button Cadastro
     var cadastrarButton = new JButton("Cadastrar");
 
+    JLabel nameLabel = new JLabel("Nome do Cliente: ");
+//        createLayout(nameLabel, cadastroFrame, 150, 20, 5, 5);
+//
+    JTextField nameField = new JTextField(20);
+//        createLayout(nameField, cadastroFrame, 100, 20, 5, 65);
+
+    JLabel dateLabel = new JLabel("Data de Vencimento: ");
+//        createLayout(dateLabel, cadastroFrame, 150, 50, 5, 5);
+//
+    JTextField paymentField = new JTextField();
+//        createLayout(paymentField, cadastroFrame, 150, 50, 5, 45);
+
+    JLabel valueLabel = new JLabel("Mensalidade: ");
+
+    JTextField valueField = new JTextField();
+
+    JLabel modalitiesLabel = new JLabel("Modalidades (separar por vírgula):");
+    JTextField modalitiesField = new JTextField();
+
+    JButton confirmButton = new JButton("Cadastrar");
+    confirmButton.setEnabled(true);
+
+    final JComponent[] inputs = new JComponent[] {
+        nameLabel,
+        nameField,
+        dateLabel,
+        paymentField,
+        valueLabel,
+        valueField,
+        modalitiesLabel,
+        modalitiesField,
+        confirmButton,
+    };
+
     cadastrarButton.addActionListener((ActionEvent event) -> {
-      JOptionPane.showMessageDialog(cadastroFrame, "Cadastro");
+      JOptionPane.showOptionDialog(
+          null,
+          inputs,
+          "Cadastro",
+          JOptionPane.DEFAULT_OPTION,
+          JOptionPane.INFORMATION_MESSAGE,
+          null,
+          new Object[] {confirmButton},
+          confirmButton
+      );
+    });
+
+    confirmButton.addActionListener((ActionEvent event) -> {
+      registerController.registerPost(
+          ((JTextField) inputs[1]).getText(),
+          ((JTextField) inputs[7]).getText().equals("") ? null : Arrays.asList(
+              ((JTextField) inputs[7]).getText().replaceAll(" ", "").split(",")),
+          Integer.valueOf(((JTextField) inputs[3]).getText()),
+          Float.valueOf(((JTextField) inputs[5]).getText()));
     });
 
     createLayout(cadastrarButton, this, 100, 30, 110, 400);
