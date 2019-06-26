@@ -1,7 +1,11 @@
 package com.gym.be.payment;
 
 import com.gym.be.register.RegisterModel;
+import com.gym.be.register.RegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,37 +17,59 @@ public class PaymentService {
 
   private PaymentRepository paymentRepository;
 
+  private MongoTemplate mongoTemplate;
+
+  private RegisterRepository registerRepository;
+
   @Autowired
-  public PaymentService(PaymentRepository paymentRepository) {
+  public PaymentService(PaymentRepository paymentRepository, MongoTemplate mongoTemplate,
+      RegisterRepository registerRepository) {
+    this.registerRepository = registerRepository;
     this.paymentRepository = paymentRepository;
+    this.mongoTemplate = mongoTemplate;
   }
 
   public PaymentModel save(PaymentModel payment) {
     return paymentRepository.save(payment);
   }
 
-  public List<PaymentModel> findAll() {
-    return paymentRepository.findAll();
-  }
+  public List<PaymentModel> findByFilter(PaymentFilterModel filterModel) {
+    List<PaymentModel> paymentModels;
+    Query dynamicQuery = new Query();
+    Criteria register = null;
+    if (filterModel.getName() != null) {
+      register =
+          Criteria.where("register").in(registerRepository.findByName(filterModel.getName()));
+    }
+    if (filterModel.getModalities() != null) {
+      register = register == null ? Criteria.where("register")
+          .in(registerRepository.findByModalitiesContains(filterModel.getModalities())) :
+          register.andOperator(Criteria.where("register")
+              .in(registerRepository.findByModalitiesContains(filterModel.getModalities())));
+    }
+    if (register != null) {
+      dynamicQuery.addCriteria(register);
+    }
 
-  public List<PaymentModel> findByRegister(List<RegisterModel> registerModelList) {
-    return paymentRepository.findByRegisterIn(registerModelList);
-  }
+    Criteria date = null;
+    if (filterModel.getInitialDate() != null) {
+      date = Criteria.where("paymentDate").gte(filterModel.getInitialDate());
+    }
+    if (filterModel.getFinalDate() != null) {
+      date = date == null ? Criteria.where("paymentDate").lte(filterModel.getFinalDate()) :
+          date.andOperator(Criteria.where("paymentDate").lte(filterModel.getFinalDate()));
+    }
 
-  public List<PaymentModel> findByPaymentInitialDate(Date initialDate) {
-    return paymentRepository.findByPaymentDateGreaterThan(initialDate);
-  }
+    if (date != null) {
+      dynamicQuery.addCriteria(date);
+    }
 
-  public List<PaymentModel> findByPaymentFinalDate(Date finalDate) {
-    return paymentRepository.findByPaymentDateLessThan(finalDate);
-  }
+    if (filterModel.getPayed() != null) {
+      Criteria payed = Criteria.where("payed").is(filterModel.getPayed());
+      dynamicQuery.addCriteria(payed);
+    }
 
-  public List<PaymentModel> findByPaymentDateBetween(Date initialDate, Date finalDate) {
-    return paymentRepository.findByPaymentDateBetween(initialDate, finalDate);
-  }
-
-  public List<PaymentModel> findByPayed(Boolean payed) {
-    return paymentRepository.findByPayed(payed);
+    return mongoTemplate.find(dynamicQuery, PaymentModel.class, "paymentModel");
   }
 
   public void generatePayment(RegisterModel student) {

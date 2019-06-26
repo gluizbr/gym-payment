@@ -1,7 +1,7 @@
 package com.gym.be.controller;
 
+import com.gym.be.payment.PaymentFilterModel;
 import com.gym.be.payment.PaymentService;
-import com.gym.be.register.RegisterModel;
 import com.gym.be.register.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,34 +38,13 @@ public class PaymentController {
       @RequestParam(value = "payed", required = false) Boolean payed,
       @RequestParam(value = "modalities", required = false) List<String> modalities) {
 
-    if (initialDate != null && finalDate != null) {
-      return ResponseEntity.ok(paymentService.findByPaymentDateBetween(initialDate, finalDate));
-    }
-
-    if (initialDate != null) {
-      return ResponseEntity.ok(paymentService.findByPaymentInitialDate(initialDate));
-    }
-
-    if (finalDate != null) {
-      return ResponseEntity.ok(paymentService.findByPaymentFinalDate(finalDate));
-    }
-
-    if (name != null) {
-      List<RegisterModel> registerModelList = new ArrayList<>();
-      registerModelList.add(registerService.findByName(name));
-      return ResponseEntity.ok(paymentService.findByRegister(registerModelList));
-    }
-
-    if (modalities != null) {
-      return ResponseEntity.ok(
-          paymentService.findByRegister(registerService.findByModalities(modalities)));
-    }
-
-    if (payed != null) {
-      return ResponseEntity.ok(paymentService.findByPayed(payed));
-    }
-
-    return ResponseEntity.ok(paymentService.findAll());
+    return ResponseEntity.ok(paymentService.findByFilter(PaymentFilterModel.builder()
+        .name(name)
+        .initialDate(initialDate)
+        .finalDate(finalDate)
+        .payed(payed)
+        .modalities(modalities)
+        .build()));
   }
 
   @PostMapping("/pay")
