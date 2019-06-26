@@ -286,10 +286,6 @@ public class UIInit extends JFrame {
           Float.valueOf(((JTextField) inputs[5]).getText()));
     });
 
-//    cadastrarButton.addActionListener((ActionEvent event) -> {
-//      JOptionPane.showMessageDialog(cadastroFrame, "Cadastro");
-//    });
-
     createLayout(cadastrarButton, this, 100, 30, 110, 400);
 
     ////////////////// TELA INICIAL //////////////////
