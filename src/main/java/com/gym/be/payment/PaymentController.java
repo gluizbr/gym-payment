@@ -1,4 +1,4 @@
-package com.gym.be.controller;
+package com.gym.be.payment;
 
 import com.gym.be.payment.PaymentFilterModel;
 import com.gym.be.payment.PaymentService;

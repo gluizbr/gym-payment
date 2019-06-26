@@ -1,6 +1,6 @@
 package com.gym.fe;
 
-import com.gym.be.controller.PaymentController;
+import com.gym.be.payment.PaymentController;
 import com.gym.be.controller.RegisterController;
 import com.gym.be.payment.PaymentModel;
 import lombok.var;
