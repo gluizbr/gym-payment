@@ -7,22 +7,17 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 @Service
 public class UIInit extends JFrame {
@@ -30,6 +25,10 @@ public class UIInit extends JFrame {
   private RegisterController registerController;
   @Autowired
   private PaymentController paymentController;
+
+  public boolean isFieldEmpty(JTextField field) {
+    return !(field.getText().trim().length() > 0);
+  }
 
   public void initUI() {
 
@@ -231,16 +230,13 @@ public class UIInit extends JFrame {
     var cadastrarButton = new JButton("Cadastrar");
 
     JLabel nameLabel = new JLabel("Nome do Cliente: ");
-//        createLayout(nameLabel, cadastroFrame, 150, 20, 5, 5);
-//
+
     JTextField nameField = new JTextField(20);
-//        createLayout(nameField, cadastroFrame, 100, 20, 5, 65);
+
 
     JLabel dateLabel = new JLabel("Data de Vencimento: ");
-//        createLayout(dateLabel, cadastroFrame, 150, 50, 5, 5);
-//
+
     JTextField paymentField = new JTextField();
-//        createLayout(paymentField, cadastroFrame, 150, 50, 5, 45);
 
     JLabel valueLabel = new JLabel("Mensalidade: ");
 
@@ -250,7 +246,7 @@ public class UIInit extends JFrame {
     JTextField modalitiesField = new JTextField();
 
     JButton confirmButton = new JButton("Cadastrar");
-    confirmButton.setEnabled(true);
+    confirmButton.setEnabled(false);
 
     final JComponent[] inputs = new JComponent[] {
         nameLabel,
@@ -263,6 +259,24 @@ public class UIInit extends JFrame {
         modalitiesField,
         confirmButton,
     };
+
+    KeyAdapter adapter = new KeyAdapter() {
+      @Override
+      public void keyReleased(KeyEvent e) {
+        super.keyReleased(e);
+
+        if (isFieldEmpty(nameField) || isFieldEmpty(paymentField) || isFieldEmpty(valueField) || isFieldEmpty(modalitiesField)) {
+          confirmButton.setEnabled(false);
+        } else {
+          confirmButton.setEnabled(true);
+        }
+      }
+    };
+
+    nameField.addKeyListener(adapter);
+    paymentField.addKeyListener(adapter);
+    valueField.addKeyListener(adapter);
+    modalitiesField.addKeyListener(adapter);
 
     cadastrarButton.addActionListener((ActionEvent event) -> {
       JOptionPane.showOptionDialog(
@@ -284,6 +298,18 @@ public class UIInit extends JFrame {
               ((JTextField) inputs[7]).getText().replaceAll(" ", "").split(",")),
           Integer.valueOf(((JTextField) inputs[3]).getText()),
           Float.valueOf(((JTextField) inputs[5]).getText()));
+
+      nameField.setText(null);
+      paymentField.setText(null);
+      valueField.setText(null);
+      modalitiesField.setText(null);
+
+      Window w = SwingUtilities.getWindowAncestor(confirmButton);
+      confirmButton.setEnabled(false);
+
+      if (w != null) {
+        w.setVisible(false);
+      }
     });
 
     createLayout(cadastrarButton, this, 100, 30, 110, 400);
