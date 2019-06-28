@@ -1,19 +1,84 @@
 \chapter{Desenvolvimento}\label{cap_intro}
-A proposta deste projeto se baseia no desenvolvimento de uma aplicação para controle de mensalidades oferecidas por uma academia para seus alunos, onde os pagamentos mensais podem, de acordo com os pacotes escolhidos pelos alunos, sofrer descontos.
 
-Estes descontos devem ser concedidos aos alunos que escolherem um pacote que contempla mais de uma modalidade. Por exemplo:
+Usaremos as tecnologias de Java e Swing (código e telas), MongoDB (estruturar o banco de dados), Spring (comunicação com o banco de dados) e GIT (gerenciamento de versão) para criação deste sistema. Além disso, o atual escopo não prevê um controle financeiro (retorno de troco, quantidade recebida ou ainda fechamento de contas a pagar).
 
-\begin{figure}[H]
+Outras informações pertinentes ao cadastro antes previstas como endereço, contato, desconto nas mensalidades entre outras também foram descartadas nesta versão e podem, futuramente, ser implementadas.
+
+\section{Telas}
+
+ A aplicação conta com duas telas onde o usuário tem a liberdade de pesquisar e cadastrar novos usuários, conforme vemos a seguir.
+ 
+\subsection{Tela de Pesquisa}
+ 
+ Assim que a aplicação é inicializada podemos observar (Figura 1) os filtros para a pesquisa de mensalidades dos alunos, um botão para pagamento e outro para efetuar os cadastros.
+ 
+ \begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=0.5\linewidth]{images/telaBuscaVazia}
+ 	\caption{Tela de Pesquisa vazia}
+ 	Fonte: pessoal.
+ 	\label{fig:telaBuscaVazia}
+ \end{figure}
+ 
+ No exemplo (Figura 2) é feita uma busca utilizando todos os filtros que retorna todas as mensalidades não pagas do cliente Léo vinculadas à modalidade musculação.
+ 
+ \begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=0.5\linewidth]{images/telaBuscaPreenchida}
+ 	\caption{Exemplo de pesquisa na Tela de Pesquisa}
+ 	Fonte: pessoal.
+ 	\label{fig:telaBuscaPreenchida}
+ \end{figure}
+
+ Ainda é possível verificar na figura que houve o pagamento das parcelas referente aos meses 06 e 07.
+ 
+Evidentemente, uma nova pesquisa com o filtro pago aplicado resulta na exibição das duas parcelas pagas (Figura 3).
+
+ \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{images/exModalidades}
-	\caption{Exemplo de modalidades}
+	\includegraphics[width=0.5\linewidth]{images/telaBuscaPreenchidaPaga}
+	\caption{Exemplo de pesquisa na Tela de Pesquisa}
 	Fonte: pessoal.
-	\label{fig:exModalidades}
+	\label{fig:telaBuscaPreenchidaPaga}
 \end{figure}
 
-Para a execução deste sistema, no escopo inicial foi proposto três telas, porém no atual projeto contemplaremos apenas duas, sendo elas cadastro e consulta. Na tela de cadastro será possível realizar todos os cadastros do sistema da academia (Alunos, Modalidades e valores, vinculos Aluno x Modalidade/Pacote, etc), enquanto na tela de consulta podemos visualizar a situação das mensalidades dos alunos (Pendente/Vencidas/Pagas) e aplicar filtros de pesquisa.
-
-Na tela de cadastro será informado, no módulo de aluno, informações mínimas como: documento, endereço, nome, modalidade/pacote etc. Já no módulo de modalidades faremos o cadastro dos tipos de modalidades oferecidas (a princípio apenas o nome) e seus respectivos valores, bem como os pacotes ofertados. Sendo assim, a construção das tabelas se dá conforme segue:
+\subsection{Tela de Cadastro} 
+ 
+ A Tela de Pesquisa introduz o acesso ao botão Cadastrar que possibilita o usuário inserir novos alunos, vinculando as modalidades, valores e a data de vencimento da parcela (Figura 4).
+ 
+ \begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=0.5\linewidth]{images/telaCadastroVazia}
+ 	\caption{Tela de Cadastro vazia}
+ 	Fonte: pessoal.
+ 	\label{fig:telaCadastroVazia}
+ \end{figure}
+ 
+ Como podemos observar, os quatro campos devem ser preenchidos para que o cadastro seja efetuado.
+ 
+ Uma vez que o preenchimento obrigatório ocorreu, é possível efetuar o cadastro (Figura 5) que poderá ser visualizado com os filtros adequados na Tela de Pesquisa.
+ 
+ \begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=0.5\linewidth]{images/telaCadastroPreenchida}
+ 	\caption{Exemplo de cadastro na Tela de Cadastro}
+ 	Fonte: pessoal.
+ 	\label{fig:telaCadastroPreenchida}
+ \end{figure}
+ 
+ Evidentemente, a busca com os filtros adequados resultam no preenchimento da tabela com os dados cadastrados (Figura 6) e possibilita o usuário a realizar as baixas necessárias.
+ 
+ \begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=0.5\linewidth]{images/telaCadastroBuscaAposCadastro}
+ 	\caption{Exemplo de pesquisa na Tela de Cadastro}
+ 	Fonte: pessoal.
+ 	\label{fig:telaCadastroBuscaAposCadastro}
+ \end{figure}
+ 
+ \section{Back-End}
+ 
+ A construção das tabelas se dá conforme segue:
 
 \begin{figure}[H]
 	\centering
@@ -30,5 +95,3 @@ Na tela de cadastro será informado, no módulo de aluno, informações mínimas
 	Fonte: pessoal.
 	\label{fig:tabelaPagamento}
 \end{figure}
-
-Usaremos as tecnologias de Java e Swing (para o código e telas), MongoDB (para estruturar o banco de dados), Spring (para comunicação com o banco de dados) e GIT (para o gerenciamento de versão) para criar este sistema que pretende facilitar a consulta de pagamentos pendentes e controlar a matrícula dos alunos. Além disso, o atual escopo não prevê um controle financeiro (retorno de troco, quantidade recebida ou ainda fechamento de contas a pagar) e pode, futuramente, ser melhorado com a implementação destes itens ou ainda relatórios, controle de usuário etc.
