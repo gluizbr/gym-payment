@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050) (preloaded format=pdflatex 2019.6.27)  27 JUN 2019 22:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050) (preloaded format=pdflatex 2019.6.27)  27 JUN 2019 23:02
 entering extended mode
 **./Relat¢rio.tex
 (Relat¢rio.tex
@@ -1295,7 +1295,7 @@ l.39 \end{folhaderosto}
 \openout2 = `ch-desenvolvimento.aux'.
 
  (ch-desenvolvimento.tex
-<images/telaBuscaVazia.png, id=62, 321.2pt x 459.7175pt>
+<images/telaBuscaVazia.png, id=64, 321.2pt x 459.7175pt>
 File: images/telaBuscaVazia.png Graphic file (type png)
 <use images/telaBuscaVazia.png>
 Package pdftex.def Info: images/telaBuscaVazia.png  used on input line 17.
@@ -1305,45 +1305,45 @@ Package pdftex.def Info: images/telaBuscaVazia.png  used on input line 17.
 
 
 ]
-<images/telaBuscaPreenchida.png, id=68, 321.2pt x 462.72874pt>
+<images/telaBuscaPreenchida.png, id=70, 321.2pt x 462.72874pt>
 File: images/telaBuscaPreenchida.png Graphic file (type png)
 <use images/telaBuscaPreenchida.png>
 Package pdftex.def Info: images/telaBuscaPreenchida.png  used on input line 27.
 
 (pdftex.def)             Requested size: 227.5pt x 327.74892pt.
  [5 <./images/telaBuscaVazia.png>]
-<images/telaBuscaPreenchidaPaga.png, id=76, 319.1925pt x 457.71pt>
+<images/telaBuscaPreenchidaPaga.png, id=78, 319.1925pt x 457.71pt>
 File: images/telaBuscaPreenchidaPaga.png Graphic file (type png)
 <use images/telaBuscaPreenchidaPaga.png>
 Package pdftex.def Info: images/telaBuscaPreenchidaPaga.png  used on input line
  39.
 (pdftex.def)             Requested size: 227.5pt x 326.22653pt.
  [6 <./images/telaBuscaPreenchida.png>]
-<images/telaCadastroVazia.png, id=84, 401.5pt x 464.73625pt>
+<images/telaCadastroVazia.png, id=86, 401.5pt x 464.73625pt>
 File: images/telaCadastroVazia.png Graphic file (type png)
 <use images/telaCadastroVazia.png>
 Package pdftex.def Info: images/telaCadastroVazia.png  used on input line 51.
 (pdftex.def)             Requested size: 227.5pt x 263.33524pt.
  [7 <./images/telaBuscaPreenchidaPaga.png>]
-<images/telaCadastroPreenchida.png, id=91, 401.5pt x 461.725pt>
+<images/telaCadastroPreenchida.png, id=93, 401.5pt x 461.725pt>
 File: images/telaCadastroPreenchida.png Graphic file (type png)
 <use images/telaCadastroPreenchida.png>
 Package pdftex.def Info: images/telaCadastroPreenchida.png  used on input line 
 63.
 (pdftex.def)             Requested size: 227.5pt x 261.62897pt.
  [8 <./images/telaCadastroVazia.png> <./images/telaCadastroPreenchida.png>]
-<images/telaCadastroBuscaAposCadastro.png, id=100, 320.19624pt x 459.7175pt>
+<images/telaCadastroBuscaAposCadastro.png, id=102, 320.19624pt x 459.7175pt>
 File: images/telaCadastroBuscaAposCadastro.png Graphic file (type png)
 <use images/telaCadastroBuscaAposCadastro.png>
 Package pdftex.def Info: images/telaCadastroBuscaAposCadastro.png  used on inpu
 t line 73.
 (pdftex.def)             Requested size: 227.5pt x 326.6332pt.
-<images/tabelaCadastro.png, id=101, 527.9725pt x 159.59625pt>
+<images/tabelaCadastro.png, id=103, 527.9725pt x 159.59625pt>
 File: images/tabelaCadastro.png Graphic file (type png)
 <use images/tabelaCadastro.png>
 Package pdftex.def Info: images/tabelaCadastro.png  used on input line 85.
 (pdftex.def)             Requested size: 318.49861pt x 96.27473pt.
-<images/tabelaPagamento.png, id=102, 530.98375pt x 190.7125pt>
+<images/tabelaPagamento.png, id=104, 530.98375pt x 190.7125pt>
 File: images/tabelaPagamento.png Graphic file (type png)
 <use images/tabelaPagamento.png>
 Package pdftex.def Info: images/tabelaPagamento.png  used on input line 93.
@@ -1356,18 +1356,18 @@ Package pdftex.def Info: images/tabelaPagamento.png  used on input line 93.
 
 
 
-]
+] [12]
 \openout2 = `ch-aula.aux'.
 
 
-(ch-aula.tex) [12
+(ch-aula.tex) [13
 
 
 
 ]
 \openout2 = `ch-conclusao.aux'.
 
- (ch-conclusao.tex) [13
+ (ch-conclusao.tex) [14
 
 
 
@@ -1379,7 +1379,7 @@ Package pdftex.def Info: images/tabelaPagamento.png  used on input line 93.
 bibitemlist
 ) 
 AED: lastpage setting LastPage
-[14
+[15
 
 
 ]
@@ -1402,10 +1402,10 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 323.
  ) 
 Here is how much of TeX's memory you used:
- 27896 strings out of 492896
- 468742 string characters out of 3132650
- 877545 words of memory out of 3000000
- 31312 multiletter control sequences out of 15000+200000
+ 27899 strings out of 492896
+ 468771 string characters out of 3132650
+ 878545 words of memory out of 3000000
+ 31313 multiletter control sequences out of 15000+200000
  589219 words of font info for 87 fonts, out of 3000000 for 9000
  1142 hyphenation exceptions out of 8191
  47i,12n,63p,893b,457s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1418,9 +1418,9 @@ e/miktex-texmf/fonts/type1/public/lm/lmri12.pfb></usr/local/share/miktex-texmf/
 fonts/type1/public/lm/lmss12.pfb></usr/local/share/miktex-texmf/fonts/type1/pub
 lic/lm/lmss17.pfb></usr/local/share/miktex-texmf/fonts/type1/public/lm/lmssbx10
 .pfb>
-Output written on Relat¢rio.pdf (15 pages, 711867 bytes).
+Output written on Relat¢rio.pdf (16 pages, 714849 bytes).
 PDF statistics:
- 251 PDF objects out of 1000 (max. 8388607)
- 48 named destinations out of 1000 (max. 500000)
- 20665 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 261 PDF objects out of 1000 (max. 8388607)
+ 50 named destinations out of 1000 (max. 500000)
+ 20673 words of extra memory for PDF output out of 20736 (max. 10000000)
 

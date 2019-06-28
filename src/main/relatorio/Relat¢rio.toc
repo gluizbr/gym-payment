@@ -17,12 +17,13 @@
 \contentsline {subsection}{\numberline {3.1.2}Spring e Lombok}{11}{subsection.3.1.2}% 
 \contentsline {subsection}{\numberline {3.1.3}MongoDB e ORM}{11}{subsection.3.1.3}% 
 \contentsline {subsection}{\numberline {3.1.4}IDE Intellij}{11}{subsection.3.1.4}% 
+\contentsline {subsection}{\numberline {3.1.5}GitHub}{12}{subsection.3.1.5}% 
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase {Conhecimentos Utilizados aprendidos na disciplina}}{12}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Conhecimentos}{12}{section.4.1}% 
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase {Conhecimentos Utilizados aprendidos na disciplina}}{13}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Conhecimentos}{13}{section.4.1}% 
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase {Conclus\IeC {\~a}o}}{13}{chapter.5}% 
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase {Conclus\IeC {\~a}o}}{14}{chapter.5}% 
 \vspace {\cftbeforechapterskip }
 \vspace {\cftbeforechapterskip }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase {Refer\^encias}}{14}{section*.13}% 
+\contentsline {chapter}{\MakeTextUppercase {Refer\^encias}}{15}{section*.13}% 
